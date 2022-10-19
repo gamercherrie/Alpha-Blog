@@ -4,7 +4,7 @@
         <div class="container">
             <div class="card text-center mt-4">
                 <div class="card-header fst-italic">
-                    By Charisse Calma
+                    By <%= article.user.username %>
                   </div>
                   <div class="card-body">
                     <h5 class="card-title"><%= link_to article.title, article_path(article), class: "link-info text-decoration-none" %></h5>
