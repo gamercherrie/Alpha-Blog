@@ -5,8 +5,10 @@ class SessionsController < ApplicationController
 
     def create
         user = User.find_by(email: params[:session][:email].downcase)
-        if user && user.authenthicate(params[:session][:password])
-
+        if user && user.authenticate(params[:session][:password])
+            session[:user_id] = user.id
+            flash[:notice] = "Logged in successully"
+            redirect_to user
         else
             flash.now[:alert] = "There was something wrong with your login details"
             render 'new'
@@ -14,5 +16,8 @@ class SessionsController < ApplicationController
     end
 
     def destroy
+        session[:user_id] = nil
+        flash[:notice] = "Logged Out"
+        redirect_to root_path
     end
 end
